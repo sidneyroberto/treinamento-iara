@@ -1,24 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native'
-import Card from './components/Card'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import RootStackParamList from './navigation'
+import Details from './screens/Details'
+import Home from './screens/Home'
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Card message='Eu sou o card 1' />
-      <Card message='Eu sou o card 2' />
-      <Card message='Eu sou outro card' />
-      <Card message='Eu sou o último card' />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name='Home'
+          component={Home}
+          options={{ title: 'Cards' }}
+        />
+        <Stack.Screen
+          name='Details'
+          component={Details}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-})
 
 export default App
