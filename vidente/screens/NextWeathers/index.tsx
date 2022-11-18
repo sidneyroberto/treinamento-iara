@@ -1,10 +1,22 @@
-import { Text, View } from 'react-native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import WeatherCard from '../../components/WeatherCard'
+import Weather from '../../models/Weather'
+import { RootStackParamList } from '../../navigation'
+import { Container, ScrollPanel } from './styles'
 
-const NextWeathers = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'NextWeathers'>
+
+const NextWeathers = ({ route }: Props) => {
+  const { weathers } = route.params
+
   return (
-    <View>
-      <Text>Next Forecasts</Text>
-    </View>
+    <Container>
+      <ScrollPanel>
+        {weathers.map((w: Weather, index) => (
+          <WeatherCard weather={w} key={index} />
+        ))}
+      </ScrollPanel>
+    </Container>
   )
 }
 

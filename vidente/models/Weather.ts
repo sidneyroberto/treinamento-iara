@@ -1,5 +1,5 @@
 type Weather = {
-  time: Date
+  time: string
   description: string
   temperature: number
   iconNumber: number
@@ -12,7 +12,7 @@ export const getWeather = (obj: any) => {
     description: IconPhrase,
     iconNumber: WeatherIcon,
     temperature: Temperature.Value,
-    time: new Date(DateTime),
+    time: DateTime ? DateTime.split('T')[1].substring(0, 5) : '',
   }
 
   return weather
