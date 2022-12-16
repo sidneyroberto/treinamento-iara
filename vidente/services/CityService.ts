@@ -2,9 +2,8 @@ import { estados } from '../data/cidades.json'
 import { API_KEY, API_URL, CITY_ENDPOINT } from '../config/api'
 import axios from 'axios'
 
-let cities = []
-
-const loadCities = () => {
+export const loadCities = () => {
+  const cities: string[] = []
   estados.forEach((e) => {
     e.cidades.forEach((c) => {
       const cityName = `${c}-${e.sigla}`
@@ -13,9 +12,8 @@ const loadCities = () => {
   })
 
   cities.sort()
+  return cities
 }
-
-loadCities()
 
 const http = axios.create({ baseURL: API_URL })
 
@@ -23,12 +21,12 @@ export const findCityCode = async (filter: string) => {
   const response = await http.get(CITY_ENDPOINT, {
     params: {
       apikey: API_KEY,
-      q: filter,
+      q: filter.replace('-', ' '),
       language: 'pt-BR',
     },
   })
 
   const { data } = response
   const key = data[0].Key
-  return key
+  return Number(key)
 }
