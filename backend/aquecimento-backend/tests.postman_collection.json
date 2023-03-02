@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "fb4f4534-f4c6-4270-914e-423f8405aac5",
+		"name": "Requisições da API de Aquecimento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2645049"
+	},
+	"item": [
+		{
+			"name": "Recuperar o valor do PI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/pi",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"pi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Somar dois números positivos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('deve somar corretamente dois números positivos', () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"    const response = pm.response.json()\r",
+							"    //const resultado = response.resultado\r",
+							"    const { resultado } = response\r",
+							"    const resultadoSoma = Number(pm.collectionVariables.get('resultadoSoma'))\r",
+							"    pm.expect(resultado).to.equal(resultadoSoma)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/soma/{{num1}}/{{num2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"soma",
+						"{{num1}}",
+						"{{num2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Somar duas strings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('deve retornar mensagem de erro se tentar somar duas strings', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const response = pm.response.json()\r",
+							"    const { mensagem } = response\r",
+							"    pm.expect(mensagem).to.equal('Os dois valores precisam ser numéricos')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/soma/banana/morango",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"soma",
+						"banana",
+						"morango"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subtrair dois números positivos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('deve subtrair corretamente dois números positivos', () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"    const response = pm.response.json()\r",
+							"    const { resultado } = response\r",
+							"    const resultadoSubtracao = Number(pm.collectionVariables.get('resultadoSubtracao'))\r",
+							"    pm.expect(resultado).to.equal(resultadoSubtracao)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/subtracao?num1={{num1}}&num2={{num2}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"subtracao"
+					],
+					"query": [
+						{
+							"key": "num1",
+							"value": "{{num1}}"
+						},
+						{
+							"key": "num2",
+							"value": "{{num2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "num1",
+			"value": "7",
+			"type": "string"
+		},
+		{
+			"key": "num2",
+			"value": "8",
+			"type": "string"
+		},
+		{
+			"key": "resultadoSoma",
+			"value": "15",
+			"type": "string"
+		},
+		{
+			"key": "resultadoSubtracao",
+			"value": "-1",
+			"type": "string"
+		}
+	]
+}
