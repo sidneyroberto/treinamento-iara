@@ -1,12 +1,16 @@
 version: '3'
 
 services:
-  dev_db:
-    image: 'mongo:latest'
+  mongo:
+    image: mongo
     ports:
       - 27017:27017
-    volumes:
-      - mongodb_data_container:/data/db
-
-volumes:
-  mongodb_data_container:
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: dev
+      ME_CONFIG_BASICAUTH_PASSWORD: senha123
+      ME_CONFIG_MONGODB_PORT: 27017
