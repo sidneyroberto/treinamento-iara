@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "c9d210c8-86da-4f97-aaf2-76ee51e05fed",
+		"name": "Blog API requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26150974"
+	},
+	"item": [
+		{
+			"name": "Save a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('it should save a valid user', () => {\r",
+							"    pm.response.to.have.status(201)\r",
+							"    const { user } = pm.response.json()\r",
+							"    pm.expect(user._id).to.not.null\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Joao Pedro\",\r\n    \"email\": \"joao.pedro.ifms@gmail.com\",\r\n    \"password\": \"Senha123\",\r\n    \"birthday\": \"2004-04-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save a user with a invalid name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('if should not save a user with invalid name', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const { errorMessages } = pm.response.json()\r",
+							"    pm.expect(errorMessages[0]).to.equal('Name cannot be empty and must have at least 5 characters')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JP\",\r\n    \"email\": \"joao.pedro.ifms@gmail.com\",\r\n    \"password\": \"Senha123\",\r\n    \"birthday\": \"2004-04-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save a user with a invalid email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('if should not save a user with invalid email', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const { errorMessages } = pm.response.json()\r",
+							"    pm.expect(errorMessages[0]).to.equal('Invalid email')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JoaoPedro\",\r\n    \"email\": \"joao.pedro.ifmsgmail.com\",\r\n    \"password\": \"Senha123\",\r\n    \"birthday\": \"2004-04-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save a user with a invalid birthday format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('if should not save a user with invalid birthday', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const { errorMessages } = pm.response.json()\r",
+							"    pm.expect(errorMessages[0]).to.equal('Invalid birthday format. valid format: yyyy-mm-dd')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JoaoPedro\",\r\n    \"email\": \"joao.pedro.ifms@gmail.com\",\r\n    \"password\": \"Senha123\",\r\n    \"birthday\": \"200-04-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save a user with a invalid birthday",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('if should not save a user with invalid birthday', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const { errorMessages } = pm.response.json()\r",
+							"    pm.expect(errorMessages[0]).to.equal('Birthday must be in the past')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JoaoPedro\",\r\n    \"email\": \"joao.pedro.ifms@gmail.com\",\r\n    \"password\": \"Senha123\",\r\n    \"birthday\": \"2023-05-13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save a user with a invalid password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('if should not save a user with invalid password', () => {\r",
+							"    pm.response.to.have.status(400)\r",
+							"    const { errorMessages } = pm.response.json()\r",
+							"    pm.expect(errorMessages[0]).to.equal('Password must contain at least 8 characteres, 1 uppercase character, and 1 digit')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JoaoPedro\",\r\n    \"email\": \"joao.pedro.ifms@gmail.com\",\r\n    \"password\": \"Se123\",\r\n    \"birthday\": \"2023-02-13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3001",
+			"type": "string"
+		}
+	]
+}
