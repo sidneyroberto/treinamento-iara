@@ -1,0 +1,20 @@
+{
+  "name": "coleta-rio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/coleta.ts"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "xml2js": "^0.5.0",
+    "xml2js-xpath": "^0.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.2",
+    "@types/xml2js": "^0.4.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
